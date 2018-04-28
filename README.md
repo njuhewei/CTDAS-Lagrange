@@ -1,3 +1,3 @@
 # CTDAS-Lagrange
 Codes for the CTDAS-Lagrange carbon assimilation system
-doi:10.5281/zenodo.1138566
+doi:10.5281/zenodo.1234231
