@@ -1,0 +1,45 @@
+ 1 T-NABR "North American Boreal"
+ 2 T-NATM "North American Temperate"
+ 3 T-SATR "South American Tropical"
+ 4 T-SATM "South American Temperate"
+ 5 T-NAFR "Northern Africa"
+ 6 T-SAFR "Southern Africa"
+ 7 T-EUBR "Eurasia Boreal"
+ 8 T-EUTM "Eurasia Temperate"
+ 9 T-ASTR "Tropical Asia"
+10 T-AUST "Australia"
+11 T-EURO "Europe"
+12 O-NPTM "North Pacific Temperate"
+13 O-WPTR "West Pacific Tropical"
+14 O-EPTR "East Pacific Tropical"
+15 O-SPTM "South Pacific Temperate"
+16 O-NOCN "Northern Ocean"
+17 O-NATM "North Atlantic Temperate"
+18 O-SATR "Atlantic Tropical"
+19 O-SATM "South Atlantic Temperate"
+20 O-SOCN "Southern Ocean"
+21 O-INTR "Indian Tropical"
+22 O-INTM "Indian Temperate"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

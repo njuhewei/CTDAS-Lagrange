@@ -1,0 +1,31 @@
+!!! Info for the CarbonTracker data assimilation system
+
+datadir         : /Storage/CO2/carbontracker/input/ctdas_2012/
+
+! For ObsPack
+obspack.input.dir   : ${datadir}/${obspack.input.id}
+obspack.input.id   : obspack_co2_1_WUR_IVAR_2012-04-13
+
+! For old carbontracker obs files
+obs.input.dir   : ${datadir}/obsnc/with_fillvalue
+obs.input.fname : obs_forecast.nc
+
+ocn.covariance  : ${datadir}/covariances/ocean_oif/oif_p3_era40.dpco2.2000.01.hdf 
+deltaco2.prefix : oif_p3_era40.dpco2
+bio.cov.dir     : ${datadir}/covariances/gridded_L50km
+bio.cov.prefix  : cov_ecoregion_
+
+regtype         : gridded_oif30
+nparameters     : 9738
+random.seed     : 4385
+regionsfile     : ${bio.cov.dir}/griddedparameters.nc
+
+! Include a naming scheme for the variables
+
+#include NamingScheme.wp_Mar2011.rc 
+
+! Info on the sites file used
+
+! For old CT
+obs.sites.rc        : ${datadir}/sites_and_weights_co2.ct10.rc
+

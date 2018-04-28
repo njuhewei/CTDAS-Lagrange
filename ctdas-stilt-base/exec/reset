@@ -1,0 +1,7 @@
+rm -r ../analysis
+rm -r ../input
+rm -r ../output
+rm -r ../restart
+rm jb*
+rm stilt*
+rm .RData*

@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+# dasjet.sh
+
+#$ -A co2 
+#$ -pe nserial 1 
+#$ -l h_rt=03:00:00 
+#$ -S /bin/sh 
+#$ -cwd
+#$ -j y
+#$ -r n
+#$ -V
+
+echo "All output piped to file das.out"
+python dasjet.py rc=dajet.rc $1  >& das.out

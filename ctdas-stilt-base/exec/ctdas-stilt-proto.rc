@@ -1,0 +1,124 @@
+! author: Wouter Peters 
+!
+! This is a blueprint for an rc-file used in CTDAS. Feel free to modify it, and please go to the main webpage for further documentation.
+!
+! Note that rc-files have the convention that commented lines start with an exclamation mark (!), while special lines start with a hashtag (#).
+!
+! When running the script start_ctdas.sh, this /.rc file will be copied to your run directory, and some items will be replaced for you.
+! The result will be a nearly ready-to-go rc-file for your assimilation job. The entries and their meaning are explained by the comments below.
+!
+!
+! HISTORY:
+!
+! Created on August 20th, 2013 by Wouter Peters
+!
+!
+! Flags whether to include cross updating state of surface and aircraft observations
+
+!co.filter           : /Storage/ctdas-wrfstilt/obspack/obspack_co2_111_CO2_v1.0.1_2015-05-19/summary/co_filtered_threshold_33.6_2010.txt 
+
+! The time for which to start and end the data assimilation experiment in format YYYY-MM-DD HH:MM:SS
+
+time.start          : 2010-01-01 00:00:00
+time.finish         : 2010-12-31 00:00:00
+
+! Whether to restart the CTDAS system from a previous cycle, or to start the sequence fresh. Valid entries are T/F/True/False/TRUE/FALSE
+
+time.restart        : False
+
+! The length of a cycle is given in days, such that the integer 7 denotes the typically used weekly cycle. Valid entries are integers > 1
+
+time.cycle          : 10
+
+! The number of cycles of lag to use for a smoother version of CTDAS. CarbonTracker CO2 typically uses 5 weeks of lag. Valid entries are integers > 0
+
+time.nlag           : 2
+
+! The directory under which the code, input, and output will be stored. This is the base directory for a run. The word
+! '/' will be replaced through the start_ctdas.sh script by a user-specified folder name. DO NOT REPLACE
+
+dir.da_run          : /Storage/CO2/wei/test_additive_fluxfac/ctdas-stilt-base/
+
+! The resources used to complete the data assimilation experiment. This depends on your computing platform.
+! The number of cycles per job denotes how many cycles should be completed before starting a new process or job, this
+! allows you to complete many cycles before resubmitting a job to the queue and having to wait again for resources.
+! Valid entries are integers > 0
+
+da.resources.ncycles_per_job : 1
+
+! The ntasks specifies the number of threads to use for the MPI part of the code, if relevant. Note that the CTDAS code
+! itself is not parallelized and the python code underlying CTDAS does not use multiple processors. The chosen observation
+! operator though might use many processors, like TM5. Valid entries are integers > 0
+
+da.resources.ntasks : 30
+
+! This specifies the amount of wall-clock time to request for each job. Its value depends on your computing platform and might take
+! any form appropriate for your system. Typically, HPC queueing systems allow you a certain number of hours of usage before 
+! your job is killed, and you are expected to finalize and submit a next job before that time. Valid entries are strings.
+
+da.resources.ntime  : 04:00:00
+
+! The resource settings above will cause the creation of a job file in which 2 cycles will be run, and 30 threads 
+! are asked for a duration of 4 hours
+!
+! Info on the DA system used, this depends on your application of CTDAS and might refer to for instance CO2, or CH4 optimizations.
+!
+
+da.system           : CarbonTracker
+
+! The specific settings for your system are read from a separate rc-file, which points to the data directories, observations, etc
+
+da.system.rc        : da/stilt/carbontracker_griddedNA.rc
+
+! This flag should probably be moved to the da.system.rc file. It denotes which type of filtering to use in the optimizer
+
+da.system.localization : CT2007
+
+! Info on the observation operator to be used, these keys help to identify the settings for the transport model in this case
+
+da.obsoperator         : STILT
+
+!
+! The TM5 transport model is controlled by an rc-file as well. The value below refers to the configuration of the TM5 model to 
+! be used as observation operator in this experiment.
+!
+
+da.obsoperator.home    : ${dir.da_run}/exec/da/stilt      !{HOME}/stilt
+da.obsoperator.rc      : ${da.obsoperator.home}/stilt.rc
+
+!
+! The number of ensemble members used in the experiment. Valid entries are integers > 2
+!
+
+da.optimizer.nmembers  : 100
+! Finally, info on the archive task, if any. Archive tasks are run after each cycle to ensure that the results of each cycle are
+! preserved, even if you run on scratch space or a temporary disk. Since an experiment can take multiple weeks to complete, moving
+! your results out of the way, or backing them up, is usually a good idea. Note that the tasks are commented and need to be uncommented
+! to use this feature.
+
+! The following key identifies that two archive tasks will be executed, one called 'alldata' and the other 'resultsonly'. 
+
+!task.rsync : alldata onlyresults
+
+! The specifics for the first task. 
+! 1> Which source directories to back up. Valid entry is a list of folders separated by spaces
+! 2> Which destination directory to use. Valid entries are a folder name, or server and folder name in rsync format as below
+! 3> Which flags to add to the rsync command
+! The settings below will result in an rsync command that looks like:
+!
+!       rsync -auv -e ssh ${dir.da_run} you@yourserver.com:/yourfolder/
+!
+
+!task.rsync.alldata.sourcedirs : ${dir.da_run}
+!task.rsync.alldata.destinationdir : you@yourserver.com:/yourfolder/
+!task.rsync.alldata.flags : -auv -e ssh
+
+! Repeated for rsync task 2, note that we only back up the analysis and output dirs here
+
+!task.rsync.onlyresults.sourcedirs : ${dir.da_run}/analysis ${dir.da_run}/output
+!task.rsync.onlyresults.destinationdir : you@yourserver.com:/yourfolder/
+!task.rsync.onlyresults.flags : -auv -e ssh
+
+
+random.seed.init    : /Storage/CO2/carbontracker/input/ctdas_2012/randomseedinit.pickle
+

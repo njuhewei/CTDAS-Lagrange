@@ -1,0 +1,9 @@
+#$ dasgridded.jb 
+#$ co2 
+#$ nserial 1 
+#$ 01:30:00 
+#$ /bin/sh 
+
+ echo "All output piped to file dasgridded.out"
+ module load python
+ python dasgridded.py rc=dagridded.rc $1  >& dasgridded.out

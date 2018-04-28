@@ -1,0 +1,30 @@
+!!! Info for the CarbonTracker data assimilation system
+
+datadir         : /Volumes/DataRaid/CO2/carbontracker/input/ctdas_2012/ 
+
+! For ObsPack
+obspack.input.dir  : ${datadir}/obspacks/${obspack.input.id}
+obspack.input.id   : obspack_co2_1_PROTOTYPE_v1.0.3_2013-01-29
+
+ocn.covariance  : ${datadir}/covariances/ocean_oif/oif_p3_era40.dpco2.2000.01.hdf 
+!ocn.covariance  : ${datadir}/covariances/ocean_oif/cov_ocean.2000.01.nc
+!bio.covariance  : ${datadir}/covariances/olson/cov_olsonregion_001_209.nc
+!bio.covariance  : ${datadir}/covariances/olson/covariance_bio_olson19.nc
+bio.cov.dir  : ${datadir}/covariances/gridded_NH/
+bio.cov.prefix : cov_ecoregion
+deltaco2.prefix : oif_p3_era40.dpco2
+regtype         : olson19_oif30
+nparameters     : 9835 
+random.seed     : 4385
+random.seed.init: ${datadir}/randomseedinit.pickle
+!regionsfile     : ${datadir}/covariances/olson/olsonparameters.nc
+regionsfile     : ${datadir}/covariances/gridded_NH/griddedNHparameters.nc
+
+! Include a naming scheme for the variables
+
+#include NamingScheme.wp_Mar2011.rc 
+
+! Info on the sites file used
+
+! For ObsPack
+obs.sites.rc        : ${obspack.input.dir}/summary/sites_weights_geocarbon.rc

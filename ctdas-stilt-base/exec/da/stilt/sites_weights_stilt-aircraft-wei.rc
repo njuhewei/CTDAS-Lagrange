@@ -1,0 +1,151 @@
+!  The threshold for rejecting an observation expressed as a number of
+!  standard deviations away from the model prediciton.  Note that the
+!  standard deviation is sqrt(HQH^T+R).
+ 
+obs.rejection.threshold:   3
+
+! Global scaling factor for the model-data-mismatch error component.
+! Good candidate for removal from code?
+
+global.R.scaling:  1.e-6
+
+! Number of different site categories:
+
+n.site.categories: 11
+
+! Each site.category.XXX contains four elements:
+! 1. (string, len=30) label for the site category.
+! 2. (real) model-data mismatch error component in ppm CO2 for summer
+! 3. (real) model-data mismatch error component in ppm CO2 for winter
+!    assigned to observations from this site category.
+! 4. (logical) may_localize
+! 5. (logical) may_reject
+
+site.category.001:                                   pfp_amt;	  3.0;       3.0;  FALSE; TRUE
+site.category.002:                                   pfp_bao;     3.0;       3.0;  FALSE; TRUE
+site.category.003:                                   pfp_lef;     3.0;       3.0;  FALSE; TRUE
+site.category.004:                                   pfp_sct;     3.0;       3.0;  FALSE;  TRUE
+site.category.005:                                   pfp_str;     3.0;       3.0;  FALSE; TRUE
+site.category.006:                                   pfp_wbi;     3.0;       3.0;  FALSE; TRUE
+site.category.007:                                   pfp_wgc;     3.0;       3.0;  FALSE;  TRUE
+site.category.008:                                   pfp_wkt;     3.0;       3.0;  FALSE; TRUE
+site.category.009:                                   pfp_air;     1.0;       1.0;  FALSE; TRUE
+site.category.010:                                   do-not-use; 1000.00;   1000.00; FALSE;  TRUE
+site.category.011:                                   do-not-simulate; 1000.00;   1000.00; FALSE;  TRUE
+
+! dataset
+
+co2_amt_surface-pfp_1_allvalid             : pfp_amt     noaa             2008-11-23   2012-08-14   no               all valid measurements
+co2_bao_surface-pfp_1_allvalid             : pfp_bao     noaa             2007-08-16   2012-08-20   no               all valid measurements
+co2_lef_surface-pfp_1_allvalid             : pfp_lef     noaa             2002-08-24   2012-08-22   no               all valid measurements
+co2_sct_surface-pfp_1_allvalid             : pfp_sct     noaa             2008-08-14   2012-08-16   no               all valid measurements
+co2_str_surface-pfp_1_allvalid             : pfp_str     noaa             2007-10-02   2012-08-19   no               all valid measurements
+co2_wbi_surface-pfp_1_allvalid             : pfp_wbi     noaa             2004-09-14   2012-08-12   no               all valid measurements
+co2_wgc_surface-pfp_1_allvalid             : pfp_wgc     noaa             2007-09-21   2012-08-16   no               all valid measurements
+co2_wkt_surface-pfp_1_allvalid             : pfp_wkt     noaa             2006-07-07   2012-08-14   no               all valid measurements
+co2_lef_aircraft-pfp_1_allvalid            : pfp_air     noaa             2002-08-24   2012-08-22   no               all valid measurements
+co2_car_aircraft-pfp_1_allvalid            : pfp_air     noaa             2000-01-13   2012-08-26   no               all valid measurements
+co2_etl_aircraft-pfp_1_allvalid            : pfp_air     noaa             2005-10-15   2012-07-21   no               all valid measurements
+co2_tgc_aircraft-pfp_1_allvalid            : pfp_air     noaa             2003-09-09   2012-07-25   no               all valid measurements
+co2_thd_aircraft-pfp_1_allvalid            : pfp_air     noaa             2003-09-02   2012-08-10   no               all valid measurements
+co2_nha_aircraft-pfp_1_allvalid            : pfp_air     noaa             2003-09-12   2012-08-29   no               all valid measurements
+co2_cma_aircraft-pfp_1_allvalid            : pfp_air     noaa             2005-08-17   2012-08-21   no               all vailid measurements
+co2_dnd_aircraft-pfp_1_allvalid            : pfp_air     noaa             2004-09-21   2012-08-16   no               all valid measurements
+co2_esp_aircraft-pfp_1_allvalid            : pfp_air     noaa             2002-11-22   2012-08-30   no               all valid measurements
+co2_pfa_aircraft-pfp_1_allvalid            : pfp_air     noaa             2000-02-07   2012-08-30   no               all valid measurements
+co2_sca_aircraft-pfp_1_allvalid            : pfp_air     noaa             2003-08-22   2012-08-23   no               all valid measurements
+co2_sgp_aircraft-pfp_1_allvalid            : pfp_air     noaa             2001-04-30   2012-08-29   no               all valid measurements
+
+
+! Move some stations for better model representivity
+ 
+n.sites.moved: 20
+
+! Format is "string;real;real"
+! String is site name
+! first real is LATITUDE change
+! second real is LONGITUDE change
+
+site.move.001:                           co2_brw_surface-flask_1_representative      ;  +1.0;  0.0
+site.move.002:                           co2_brw_surface-insitu_1_afternoon          ;  +1.0;  0.0
+
+! Note that bhd (Baring Head) is not in the active sites list prepped.
+
+site.move.003:                           co2_bhd_surface-flask_1_representative      ;  -1.0; +1.0
+site.move.004:                           co2_bsc_surface-flask_1_representative      ;   0.0; +1.0
+site.move.005:                           co2_cba_surface-flask_1_representative      ;  -1.0;  0.0
+site.move.006:                           co2_cgo_surface-flask_1_representative      ;   0.0; -1.0
+site.move.007:                           co2_cgo_surface-flask_2_representative      ;   0.0; -1.0
+
+! Note that cpt (Cape Point SA) is not in the active sites list.
+
+site.move.008:                           co2_cpt_surface-flask_1_representative      ;  -1.0;  0.0
+site.move.009:                           co2_esp_surface-insitu_6_afternoon          ;   0.0; -1.0
+site.move.010:                           co2_ice_surface-flask_1_representative      ;  -1.0;  0.0
+site.move.011:                           co2_key_surface-flask_1_representative      ;   0.0; +1.0
+site.move.012:                           co2_mhd_surface-flask_1_representative      ;   0.0; -1.0
+site.move.013:                           co2_pta_surface-flask_1_representative      ;   0.0; -1.0
+site.move.014:                           co2_tap_surface-flask_1_representative      ;  -1.0; -1.0
+site.move.015:                           co2_thd_surface-flask_1_representative      ;   0.0; -1.0
+site.move.016:                           co2_uta_surface-flask_1_representative      ;   0.0; -1.0
+site.move.017:                           co2_cpt_surface-insitu_36_representative    ;  -1.0;  0.0
+site.move.018:                           co2_cgo_surface-flask_4_representative      ;   0.0; -1.0
+site.move.019:                           co2_cba_surface-flask_4_representative      ;  -1.0;  0.0
+site.move.020:                           co2_esp_surface-flask_2_representative      ;   0.0; -1.0
+
+
+! Some sites include hourly data. Select here which hours of the day (lt) should be included. 
+! In case all data should be rejected, it is sufficient to use category do-not-use.
+! Format is "string;real;real"
+! String is site name
+! first real is from hour of the day
+! second real is to hour of the day
+
+n.sites.hourly: 20
+
+site.hourly.001:                         co2_amt_surface-pfp_1_allvalid          ;   10;   18
+site.hourly.002:                         co2_bao_surface-pfp_1_allvalid          ;   10;   18
+site.hourly.003:                         co2_lef_surface-pfp_1_allvalid          ;   10;   18
+site.hourly.004:                         co2_sct_surface-pfp_1_allvalid          ;   10;   18
+site.hourly.005:                         co2_str_surface-pfp_1_allvalid          ;   10;   18
+site.hourly.006:                         co2_wbi_surface-pfp_1_allvalid          ;   10;   18
+site.hourly.007:                         co2_wgc_surface-pfp_1_allvalid          ;   10;   18
+site.hourly.008:                         co2_wkt_surface-pfp_1_allvalid          ;   10;   18
+site.hourly.009:                         co2_lef_aircraft-pfp_1_allvalid         ;   0;   24
+site.hourly.010:                         co2_car_aircraft-pfp_1_allvalid         ;   0;   24
+site.hourly.011:                         co2_etl_aircraft-pfp_1_allvalid         ;   0;   24
+site.hourly.012:                         co2_tgc_aircraft-pfp_1_allvalid         ;   0;   24
+site.hourly.013:                         co2_thd_aircraft-pfp_1_allvalid         ;   0;   24
+site.hourly.014:                         co2_nha_aircraft-pfp_1_allvalid         ;   0;   24
+site.hourly.015:                         co2_cma_aircraft-pfp_1_allvalid         ;   0;   24
+site.hourly.016:                         co2_dnd_aircraft-pfp_1_allvalid         ;   0;   24
+site.hourly.017:                         co2_esp_aircraft-pfp_1_allvalid         ;   0;   24
+site.hourly.018:                         co2_pfa_aircraft-pfp_1_allvalid         ;   0;   24
+site.hourly.019:                         co2_sca_aircraft-pfp_1_allvalid         ;   0;   24
+site.hourly.020:                         co2_sgp_aircraft-pfp_1_allvalid         ;   0;   24
+
+
+n.sites.foot: 20
+
+site.foot.001:                         co2_amt_surface-pfp_1_allvalid          ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.002:                         co2_bao_surface-pfp_1_allvalid          ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.003:                         co2_lef_surface-pfp_1_allvalid          ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.004:                         co2_sct_surface-pfp_1_allvalid          ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.005:                         co2_str_surface-pfp_1_allvalid          ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.006:                         co2_wbi_surface-pfp_1_allvalid          ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.007:                         co2_wgc_surface-pfp_1_allvalid          ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.008:                         co2_wkt_surface-pfp_1_allvalid          ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.009:                         co2_lef_aircraft-pfp_1_allvalid         ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.010:                         co2_car_aircraft-pfp_1_allvalid         ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.011:                         co2_etl_aircraft-pfp_1_allvalid         ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.012:                         co2_tgc_aircraft-pfp_1_allvalid         ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.013:                         co2_thd_aircraft-pfp_1_allvalid         ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.014:                         co2_nha_aircraft-pfp_1_allvalid         ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.015:                         co2_cma_aircraft-pfp_1_allvalid         ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.016:                         co2_dnd_aircraft-pfp_1_allvalid         ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.017:                         co2_esp_aircraft-pfp_1_allvalid         ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.018:                         co2_pfa_aircraft-pfp_1_allvalid         ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.019:                         co2_sca_aircraft-pfp_1_allvalid         ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+site.foot.020:                         co2_sgp_aircraft-pfp_1_allvalid         ;/Storage/ctdas-wrfstilt/new_stilt_footprints/flask/
+
+co.filter:                             co2_all_sites                           ;/Storage/ctdas-wrfstilt/obspack/obspack_co2_111_CO2_v1.0.1_2015-05-19/summary/co_filtered_threshold_33.6_2010.txt 

@@ -1,0 +1,75 @@
+! output naming scheme for CarbonTracker savestate files, version May 07 by Wouter Peters
+
+! assimilated quantities, observation details
+
+assimilated.co2_mixingratio.observed    : co2_obs_fcast
+assimilated.latitude.observed           : lat_obs_fcast
+assimilated.longitude.observed          : lon_obs_fcast
+assimilated.height.observed             : height_obs_fcast
+assimilated.code.observed               : stationnames_obs_fcast
+assimilated.time.observed               : itau_obs_fcast
+assimilated.eventnumber.observed        : eventnumber_obs_fcast
+
+! assimilated quantities, simulation details
+
+assimilated.co2_mixingratio.simulated   : co2_sim_fcast
+assimilated.flag.simulated              : flag_sim_fcast
+assimilated.hphr.simulated              : hqhr_sim_fcast
+assimilated.modeldatamismatch.simulated : error_sim_fcast
+assimilated.co2_mixingratio.ensemble.simulated   : dF
+
+! analysis quantities, sampled after each optimization and thus not necessarily final
+
+analyzed.co2_mixingratio.simulated : co2_sim_ana
+
+! same for quantities sampled from optimized/final results
+
+final.co2_mixingratio.observed    : co2_obs_final
+final.latitude.observed           : lat_obs_final
+final.longitude.observed          : lon_obs_final
+final.height.observed             : height_obs_final
+final.code.observed               : stationnames_obs_final
+final.time.observed               : itau_obs_final
+final.eventnumber.observed        : eventnumber_obs_final
+
+! final optimized quantities, simulation details
+
+final.co2_mixingratio.simulated         : co2_sim_final
+final.co2_bg_mixingratio.simulated      : co2_bg_sim_final
+final.co2_fossil_mixingratio.simulated  : co2_ff_sim_final
+final.co2_fires_mixingratio.simulated   : co2_fires_sim_final
+final.co2_bio_mixingratio.simulated     : co2_bio_sim_final
+final.co2_ocean_mixingratio.simulated   : co2_ocean_sim_final
+final.co2_mixingratio.ensemble.simulated : dF_f
+
+! background fluxes
+
+background.co2.fossil.flux  : flux_ff_prior_mean
+background.co2.fires.flux   : flux_fires_prior_mean
+background.co2.firesam.flux : flux_firesam_prior_mean
+background.co2.bio.flux     : flux_bio_prior_mean
+background.co2.biosam.flux  : flux_biosam_prior_mean
+background.co2.ocean.flux   : flux_ocean_prior_mean
+background.co2.res.flux     : flux_res_prior_mean
+background.co2.gpp.flux     : flux_gpp_prior_mean
+
+! optimized fluxes
+
+final.co2.fossil.flux  : flux_ff_post_mean
+final.co2.fires.flux   : flux_fires_post_mean
+final.co2.bio.flux     : flux_bio_post_mean
+final.co2.ocean.flux   : flux_ocean_post_mean
+final.co2.res.flux     : flux_res_post_mean
+final.co2.gpp.flux     : flux_gpp_post_mean
+
+! background parameters
+
+background.param.mean       : xpc
+background.param.ensemble   : pdX
+
+! optimized parameters
+
+final.param.mean       : xac
+final.param.ensemble   : adX
+final.param.mean.1x1   : flux_multiplier_m
+

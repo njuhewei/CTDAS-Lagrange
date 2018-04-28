@@ -1,0 +1,21 @@
+! Info on the data assimilation cycle
+
+time.restart        : False
+time.start          : 2007-01-01 00:00:00
+time.finish         : 2008-01-01 00:00:00
+time.cycle          : 10
+time.nlag           : 3
+dir.da_run          : /Storage/CO2/peters/test_region_obspack/
+
+
+! Info on the DA system used
+
+da.system           : CarbonTracker
+da.system.rc        : da/rc/carbontracker.rc
+
+! Info on the forward model to be used
+
+da.obsoperator         : TM5
+da.obsoperator.rc      : ../../../../Desktop/ctdirs/pycasso-tm5-ctdas.rc
+da.obsoperator.threads  : 2
+da.optimizer.nmembers  : 100

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "All output piped to file ctdas-stilt-proto.log"
+export HOST='kermadec'
+export icycle_in_job=999
+python ctdas-stilt-proto.py rc=ctdas-stilt-proto.rc -v $1 >& ctdas-stilt-proto.log & 
